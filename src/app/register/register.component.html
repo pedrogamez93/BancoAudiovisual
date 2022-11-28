@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <div class="card card-container" style="margin-top: 80px !important;">
-      
+
       <form
         *ngIf="!isSuccessful"
         name="form"
@@ -50,6 +50,56 @@
             </div>
           </div>
         </div>
+
+        <div class="container">
+          <label for="country">Seleccione pais de residencia</label>
+            <select [(ngModel)]="selectedCountry.id" (change)="onSelect($any($event.target).value)" country='chile' class="form-control">
+
+                <option *ngFor="let country of countries" value={{country.id}}>
+                  {{country.name}}
+                </option>
+            </select>
+          </div>
+
+          <br>
+
+          <div *ngIf="country == 'chile'">
+            <div class="container">
+              <label for="cyty">Seleccione ciudad provincia o región de residencia</label>
+              <select class="form-control">
+                <option *ngFor="let city of  cities" value={{city.id}}>
+
+                {{city.name}}
+
+                </option>
+              </select>
+            </div>
+          </div>
+<br>
+
+          <div class="container">
+            <label for="empresa">Seleccione empresa en la cual trabaja</label>
+            <select [(ngModel)]="selectedEmpresa.id" (change)="onSelect2($any($event.target).value)" class="form-control">
+
+              <option *ngFor="let empresa of empresas" value={{empresa.id}}>
+              {{empresa.name}}
+              </option>
+            </select>
+          </div>
+
+          <br>
+
+          <div class="container">
+            <label for="empresa">Seleccione su cargo</label>
+            <select class="form-control">
+              <option *ngFor="let cargo of  cargos" value={{cargo.id}}>
+
+              {{cargo.name}}
+
+              </option>
+            </select>
+          </div>
+
         <div class="form-group">
           <label for="password">Clave</label>
           <input
@@ -72,22 +122,24 @@
           <input
           type="password"
           class="form-control"
-          
+
         />
-        
+
         </div>
-        <div class="form-group" style="margin-top:20px; 
+        <div class="form-group" style="margin-top:20px;
         margin-bottom: 20px;">
           <button class="btn btn-primary btn-block">Registrar</button>
         </div>
-  
+
         <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
           Registro fallido!<br />{{ errorMessage }}
         </div>
-      </form>
-  
+  </form>
+
       <div class="alert alert-success" *ngIf="isSuccessful">
         Registro exitoso!
       </div>
     </div>
 </div>
+
+
