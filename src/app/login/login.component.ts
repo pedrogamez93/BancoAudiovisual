@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
+import { SocialauthService } from '../_services/socialauth.service';
 import { StorageService } from '../_services/storage.service';
-import { SocialAuthService } from "angularx-social-login";
-import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
-
-import { SocialUser } from "angularx-social-login";
+import { User } from '../models/user';
 
 
 @Component({
@@ -13,6 +11,7 @@ import { SocialUser } from "angularx-social-login";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+ 
   form: any = {
     username: null,
     password: null
@@ -21,23 +20,16 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
-  user: SocialUser;
-  loggedIn: boolean;
+  UserModel= new User;
+  SocialLogindata=false;
 
-  constructor(private authService: AuthService, private storageService: StorageService, private SocialauthService: SocialAuthService) { }
+  constructor(private authService: AuthService, private storageService: StorageService,private SocialAuthServices:SocialauthService) { }
 
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
       this.roles = this.storageService.getUser().roles;
     }
-
-    this.SocialauthService.authState.subscribe((user) => {
-      this.user = user;
-      this.loggedIn = (user != null);
-    });
-
-
   }
 
   onSubmit(): void {
@@ -59,21 +51,25 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  googleAuth () {
+    this.SocialAuthServices.googleAuth();
+    this.SocialLogindata=true;
+    this.SocialAuthServices.getStateUser().subscribe(
+      res => {
+        this.UserModel.displayName = res?.displayName!;
+        this.UserModel.email = res?.email!;
+        
+      }
+    )
+    this.reloadPage();
+  
+    
+      }
   reloadPage(): void {
     window.location.reload();
   }
 
+ 
 
-  
-  signInWithGoogle(): void {
-    this.SocialauthService.signIn(GoogleLoginProvider.PROVIDER_ID);
-  }
-
-  signInWithFB(): void {
-    this.SocialauthService.signIn(FacebookLoginProvider.PROVIDER_ID);
-  }
-
-  signOut(): void {
-    this.SocialauthService.signOut();
-  }
+ 
 }

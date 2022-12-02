@@ -5,6 +5,8 @@ import { EmpresaI, CargoI } from '../models/model.interface';
 
 import{ DataService } from '../services/data.service';
 
+import { SocialauthService } from '../_services/socialauth.service';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-register',
@@ -32,17 +34,23 @@ export class RegisterComponent implements OnInit {
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
+  UserModel= new User;
+  SocialLogindata=false;
+  public correosave :any;
 
-  constructor(private authService: AuthService, private dataSvc: DataService) {
+
+  constructor(private authService: AuthService, private dataSvc: DataService, private SocialAuthServices:SocialauthService) {
 
 
    }
 
+   
+
+
   ngOnInit(): void {
     this.countries = this.dataSvc.getCountries();
     this.empresas = this.dataSvc.getEmpresas();
-   console.log(this.dataSvc.getCountries());
-   console.log(this.dataSvc.getCities());
+   
 
   }
 
@@ -69,6 +77,43 @@ export class RegisterComponent implements OnInit {
       }
     });
   }
+
+  onSubmitG(): void {
+    
+
+    this.authService.register(this.correosave, this.correosave, this.correosave).subscribe({
+      next: data => {
+        console.log(data);
+        this.isSuccessful = true;
+        this.isSignUpFailed = false;
+      },
+      error: err => {
+        this.errorMessage = err.error.message;
+        this.isSignUpFailed = true;
+      }
+    });
+  }
+
+
+  googleAuth () {
+    this.SocialAuthServices.googleAuth();
+    this.SocialLogindata=true;
+    this.SocialAuthServices.getStateUser().subscribe(
+      res => {
+        this.UserModel.displayName = res?.displayName!;
+        this.UserModel.email = res?.email!;
+      this.correosave =this.UserModel.displayName;
+      }
+
+    )
+  this.onSubmitG();
+    
+      }
+      
+ 
+ 
+  
+  
 }
 
 
