@@ -3,7 +3,7 @@ import { AuthService } from '../_services/auth.service';
 import { CountryI, CityI } from '../models/model.interface';
 import { EmpresaI, CargoI } from '../models/model.interface';
 
-import{ DataService } from '../services/data.service';
+import{ DataService } from '../_services/data.service';
 
 import { SocialauthService } from '../_services/socialauth.service';
 import { User } from '../models/user';
@@ -44,13 +44,13 @@ export class RegisterComponent implements OnInit {
 
    }
 
-   
+
 
 
   ngOnInit(): void {
     this.countries = this.dataSvc.getCountries();
     this.empresas = this.dataSvc.getEmpresas();
-   
+
 
   }
 
@@ -79,7 +79,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmitG(): void {
-    
+
 
     this.authService.register(this.correosave, this.correosave, this.correosave).subscribe({
       next: data => {
@@ -107,13 +107,13 @@ export class RegisterComponent implements OnInit {
 
     )
   this.onSubmitG();
-    
+
       }
-      
- 
- 
-  
-  
+
+
+
+
+
 }
 
 

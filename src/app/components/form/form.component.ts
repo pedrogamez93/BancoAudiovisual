@@ -4,7 +4,7 @@ import { provideRoutes } from '@angular/router';
 import { CountryI, CityI } from '../../models/model.interface';
 import { EmpresaI, CargoI } from '../../models/model.interface';
 
-import{ DataService } from '../../services/data.service';
+import{ DataService } from '../../_services/data.service';
 
 @Component({
   selector: 'app-form',
