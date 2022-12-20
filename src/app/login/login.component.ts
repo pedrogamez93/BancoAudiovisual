@@ -3,6 +3,7 @@ import { AuthService } from '../_services/auth.service';
 import { SocialauthService } from '../_services/socialauth.service';
 import { StorageService } from '../_services/storage.service';
 import { User } from '../models/user';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,7 +24,10 @@ export class LoginComponent implements OnInit {
   UserModel= new User;
   SocialLogindata=false;
 
-  constructor(private authService: AuthService, private storageService: StorageService,private SocialAuthServices:SocialauthService) { }
+  constructor(private authService: AuthService, 
+    private storageService: StorageService,
+    private SocialAuthServices:SocialauthService,
+    private router:Router) { }
 
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
@@ -31,10 +35,12 @@ export class LoginComponent implements OnInit {
       this.roles = this.storageService.getUser().roles;
     }
   }
+  
 
   onSubmit(): void {
+    
     const { username, password } = this.form;
-
+   
     this.authService.login(username, password).subscribe({
       next: data => {
         this.storageService.saveUser(data);
@@ -58,13 +64,33 @@ export class LoginComponent implements OnInit {
       res => {
         this.UserModel.displayName = res?.displayName!;
         this.UserModel.email = res?.email!;
-        
-      }
-    )
-    this.reloadPage();
-  
+
+        const username =this.UserModel.email; 
+        const password =this.UserModel.email;
+         
+        this.authService.login(username, password).subscribe({
+          next: data => {
+            this.storageService.saveUser(data);
     
-      }
+            this.isLoginFailed = false;
+            this.isLoggedIn = true;
+            this.roles = this.storageService.getUser().roles;
+            this.reloadPage();
+          },
+          error: err => {
+            this.errorMessage = err.error.message;
+            this.isLoginFailed = true;
+          }
+        });
+
+        
+      })
+
+     
+   
+  }
+
+
   reloadPage(): void {
     window.location.reload();
   }

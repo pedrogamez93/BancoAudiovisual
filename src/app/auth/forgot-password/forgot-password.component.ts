@@ -21,7 +21,7 @@ export class ForgotPasswordComponent implements OnInit {
   async onReset(){
     try{
       const email = this.userEmail.value;
-      await this.authSvc.resetPassword('email');
+      await this.authSvc.resetPassword(email);
       window.alert('Correo enviado, revisa tu bandeja de entrada')
       //redireccionamiento al home//
       this.router.navigate(['/login']);

@@ -8,8 +8,12 @@
         #f="ngForm"
         novalidate
       >
-        <div class="form-group form-control-lg">
-          <label for="username">Usuario</label>
+
+    
+
+    <div class="container">
+        <div class="">
+          <label for="username" style="font-size: 17px;">Usuario</label>
           <input
             type="text"
             class="form-control"
@@ -32,8 +36,8 @@
             </div>
           </div>
         </div>
-        <div class="form-group form-control-lg">
-          <label for="email">Correo</label>
+        <div class="">
+          <label for="email" style="font-size: 17px;">Correo</label>
           <input
             type="email"
             class="form-control"
@@ -52,8 +56,7 @@
             </div>
           </div>
         </div>
-
-        <div class="container">
+     
           <label for="country">Seleccione pais de residencia</label>
             <select [(ngModel)]="selectedCountry.id" (change)="onSelect($any($event.target).value)" country='chile' class="form-control" name="pais">
 
@@ -101,8 +104,8 @@
               </option>
             </select>
           </div>
-
-        <div class="form-group form-control-lg">
+          <div class="container">
+        <div class="">
           <label for="password">Clave</label>
           <input
             type="password"
@@ -129,7 +132,7 @@
         />
 
         </div>
-        <div class="form-group form-control-lg" style="margin-top:20px;
+        <div class="" style="margin-top:20px;
         margin-bottom: 20px;">
           <button class="btn btn-primary btn-block">Registrar</button>
         </div>
@@ -138,11 +141,12 @@
           Registro fallido!<br />{{ errorMessage }}
         </div>
 
-        <button class="btn btn-light btn btn-lg rounded-pill w100 mb-3 just"(click)="googleAuth();">
+        <button class="btn btn-light btn btn-lg rounded-pill w100 mb-3 just" (click)="googleAuth();">
           <i class="bi bi-google me-2"></i>
 
           <span class="text-dark fs-6">Registrar con google</span>
         </button>
+      </div>
   </form>
 
       <div class="alert alert-success" *ngIf="isSuccessful">

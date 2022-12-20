@@ -44,7 +44,11 @@ export class RegisterComponent implements OnInit {
 
    }
 
+<<<<<<< Updated upstream
 
+=======
+  
+>>>>>>> Stashed changes
 
 
   ngOnInit(): void {
@@ -63,7 +67,10 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
+    
     const { username, email, password } = this.form;
+    
+    this.authService.signUpWithEmail(email, password);
 
     this.authService.register(username, email, password).subscribe({
       next: data => {
@@ -103,11 +110,36 @@ export class RegisterComponent implements OnInit {
         this.UserModel.displayName = res?.displayName!;
         this.UserModel.email = res?.email!;
       this.correosave =this.UserModel.displayName;
+<<<<<<< Updated upstream
       }
 
     )
   this.onSubmitG();
 
+=======
+    
+      const username = this.UserModel.email;
+      const email = this.UserModel.email;
+      const password = this.UserModel.email;
+
+      this.authService.register(username, email, password).subscribe({
+        next: data => {
+          console.log(data);
+          this.isSuccessful = true;
+          this.isSignUpFailed = false;
+        },
+        error: err => {
+          this.errorMessage = err.error.message;
+          this.isSignUpFailed = true;
+        }
+      });
+
+    } )
+ 
+  
+      
+    
+>>>>>>> Stashed changes
       }
 
 

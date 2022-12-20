@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable,NgZone } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
-const AUTH_API = 'http://localhost:8080/api/auth/';
+
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -13,12 +15,48 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class AuthService {
+  
+  AUTH_API= environment.AUTH_API;
 
-  constructor(private http: HttpClient, public afAuth: AngularFireAuth) {}
+  constructor(private http: HttpClient,
+     public afAuth: AngularFireAuth, 
+     public router : Router,
+     public ngZone: NgZone) {}
+
+
+  
+
+  sendVerificationEmail() {
+    return this.afAuth.currentUser
+      .then((user) => {
+        console.log('Se realizo en envio de correo ');
+        return user.sendEmailVerification();
+       
+      })
+      .then(() => {
+        //Aqui va la accion que quieres realizar luego de cumplida la accion de arriba
+      });
+    
+  }
+
+  // Registro con email
+signUpWithEmail(email: string, password: string) {
+  return this.afAuth.createUserWithEmailAndPassword(email,password).then((result) =>{
+
+    console.log('registro exitoso');
+  }).catch((error) => {
+    console.log(error.message);
+  })
+
+
+ }
+
 
   async resetPassword(email: string): Promise<void>{
     try{
-      return this.sendPasswordResetEmail(email);
+      this.sendVerificationEmail();
+      return this.afAuth.sendPasswordResetEmail(email);
+
     }
 
     catch(error){console.log(error)}
@@ -26,7 +64,7 @@ export class AuthService {
 
   login(username: string, password: string): Observable<any> {
     return this.http.post(
-      AUTH_API + 'signin',
+      this.AUTH_API + 'signin',
       {
         username,
         password,
@@ -36,8 +74,9 @@ export class AuthService {
   }
 
   register(username: string, email: string, password: string): Observable<any> {
+    this.signUpWithEmail(email,password);
     return this.http.post(
-      AUTH_API + 'signup',
+      this.AUTH_API + 'signup',
       {
         username,
         email,
@@ -45,10 +84,11 @@ export class AuthService {
       },
       httpOptions
     );
+    
   }
 
   logout(): Observable<any> {
-    return this.http.post(AUTH_API + 'signout', { }, httpOptions);
+    return this.http.post(this.AUTH_API + 'signout', { }, httpOptions);
   }
 
   sendPasswordResetEmail(email:String){}
