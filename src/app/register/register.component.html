@@ -1,0 +1,158 @@
+<div class="col-md-12">
+    <div class="card card-container" style="margin-top: 80px !important;">
+
+      <form
+        *ngIf="!isSuccessful"
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+      >
+
+    
+
+    <div class="container">
+        <div class="">
+          <label for="username" style="font-size: 17px;">Usuario</label>
+          <input
+            type="text"
+            class="form-control"
+            name="username"
+            [(ngModel)]="form.username"
+            required
+            minlength="3"
+            maxlength="20"
+            #username="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+
+          />
+          <div *ngIf="username.errors && f.submitted" class="invalid-feedback">
+            <div *ngIf="username.errors['required']">Usuario es requerido</div>
+            <div *ngIf="username.errors['minlength']">
+              El nombre de usuario debe tener al menos 3 caracteres
+            </div>
+            <div *ngIf="username.errors['maxlength']">
+              El nombre de usuario debe tener como máximo 20 caracteres
+            </div>
+          </div>
+        </div>
+        <div class="">
+          <label for="email" style="font-size: 17px;">Correo</label>
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            [(ngModel)]="form.email"
+            required
+            email
+            #email="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
+
+          />
+          <div *ngIf="email.errors && f.submitted" class="invalid-feedback">
+            <div *ngIf="email.errors['required']">El correo es requerido</div>
+            <div *ngIf="email.errors['email']">
+              El correo electrónico debe ser una dirección de correo electrónico válida
+            </div>
+          </div>
+        </div>
+     
+          <label for="country">Seleccione pais de residencia</label>
+            <select [(ngModel)]="selectedCountry.id" (change)="onSelect($any($event.target).value)" country='chile' class="form-control" name="pais">
+
+                <option *ngFor="let country of countries" value={{country.id}}>
+                  {{country.name}}
+                </option>
+            </select>
+          </div>
+
+          <br>
+
+          <div *ngIf="country == 'chile'">
+            <div class="container">
+              <label for="cyty">Seleccione ciudad provincia o región de residencia</label>
+              <select class="form-control" name="provincia">
+                <option *ngFor="let city of  cities" value={{city.id}}>
+
+                {{city.name}}
+
+                </option>
+              </select>
+            </div>
+          </div>
+<br>
+
+          <div class="container">
+            <label for="empresa">Seleccione empresa en la cual trabaja</label>
+            <select [(ngModel)]="selectedEmpresa.id" (change)="onSelect2($any($event.target).value)" class="form-control" name="empresa">
+
+              <option *ngFor="let empresa of empresas" value={{empresa.id}}>
+              {{empresa.name}}
+              </option>
+            </select>
+          </div>
+
+          <br>
+
+          <div class="container">
+            <label for="empresa">Seleccione su cargo</label>
+            <select class="form-control" name="cargo">
+              <option *ngFor="let cargo of  cargos" value={{cargo.id}}>
+
+              {{cargo.name}}
+
+              </option>
+            </select>
+          </div>
+          <div class="container">
+        <div class="">
+          <label for="password">Clave</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            [(ngModel)]="form.password"
+            required
+            minlength="6"
+            #password="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+
+          />
+          <div *ngIf="password.errors && f.submitted" class="invalid-feedback">
+            <div *ngIf="password.errors['required']">La clave es requerida</div>
+            <div *ngIf="password.errors['minlength']">
+              La contraseña debe tener al menos 6 caracteres
+            </div>
+          </div>
+          <label for="password">Repetir Clave</label>
+          <input
+          type="password"
+          class="form-control"
+
+        />
+
+        </div>
+        <div class="" style="margin-top:20px;
+        margin-bottom: 20px;">
+          <button class="btn btn-primary btn-block">Registrar</button>
+        </div>
+
+        <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+          Registro fallido!<br />{{ errorMessage }}
+        </div>
+
+        <button class="btn btn-light btn btn-lg rounded-pill w100 mb-3 just" (click)="googleAuth();">
+          <i class="bi bi-google me-2"></i>
+
+          <span class="text-dark fs-6">Registrar con google</span>
+        </button>
+      </div>
+  </form>
+
+      <div class="alert alert-success" *ngIf="isSuccessful">
+        Registro exitoso!
+      </div>
+    </div>
+</div>
+
+
