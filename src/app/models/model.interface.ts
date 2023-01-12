@@ -20,3 +20,14 @@ export interface CargoI{
   cargoId:number;
   name:string;
 }
+
+export interface ExperienceI{
+  id: number;
+  name: string;
+}
+
+export interface SubexperienceI{
+  id: number;
+  experienceId: number;
+  name: string;
+}

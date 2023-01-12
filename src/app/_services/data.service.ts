@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CountryI, CityI, EmpresaI, CargoI } from '../models/model.interface';
+import { CountryI, CityI, EmpresaI, CargoI, ExperienceI, SubexperienceI } from '../models/model.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -1043,7 +1043,289 @@ import { CountryI, CityI, EmpresaI, CargoI } from '../models/model.interface';
           name :'OTRO'
 
         },
+ ];
+          private experience : ExperienceI[]=[
+        {
+          id : 1,
+          name : ' Aventura y deporte'
+        },
+        {
+          id : 2,
+          name : 'Naturaleza'
+        },
+        {
+          id : 3,
+          name : 'Gastronomia'
+        },
+        {
+          id : 4,
+          name : 'Paseos en viñas'
+        },
+        {
+          id : 5,
+          name : 'Enoturismo'
+        },
+        {
+          id :6,
+          name : 'Turismo indigena'
+        },
+        {
+          id :7,
+          name : 'Cultura'
+        },
+        {
+          id : 8,
+          name : 'Astroturismo'
+        },
+        {
+          id : 9,
+          name : 'Navegación'
+        },
+        {
+          id : 10,
+          name :'Relajo y Bienestar'
+        },
+        {
+          id : 11,
+          name : 'Balnearios'
+        },
+        {
+          id : 12,
+          name : 'Vida Urbana'
+        },
+        {
+          id :13,
+          name : 'Turismo de Reuniones'
+        },
 
+      ];
+
+      private subexperience : SubexperienceI[]=[
+        {
+          id : 1,
+          experienceId : 1,
+          name : 'Snowboard'
+        },
+        {
+          id : 2,
+          experienceId : 1,
+          name : 'Kitesurf'
+        },
+        {
+          id : 3,
+          experienceId : 1,
+          name : 'Buceo'
+        },
+        {
+          id : 4,
+          experienceId : 1,
+          name : 'Ski'
+        },
+        {
+          id : 5,
+          experienceId : 1,
+          name : 'Sandboard'
+        },
+        {
+          id :6,
+          experienceId : 1,
+          name : 'Trekking'
+        },
+        {
+          id :7,
+          experienceId : 1,
+          name : 'Pesca deportiva'
+        },
+        {
+          id : 8,
+          experienceId : 1,
+          name : 'Parapente'
+        },
+        {
+          id : 9,
+          experienceId : 1,
+          name : 'Rafting'
+        },
+        {
+          id : 10,
+          experienceId : 1,
+          name :'Kayak'
+        },
+        {
+          id : 11,
+          experienceId : 1,
+          name : 'Escaladas'
+        },
+        {
+          id : 12,
+          experienceId : 1,
+          name : 'Montañismo'
+        },
+        {
+          id :13,
+          experienceId : 1,
+          name : 'Mountain Bike'
+        },
+        {
+          id : 14,
+          experienceId : 1,
+          name : 'Canopy'
+        },
+        {
+          id : 15,
+          experienceId : 1,
+          name : 'Cabalgatas'
+        },
+        {
+          id : 16,
+          experienceId : 1,
+          name : 'Surf'
+        },
+        {
+          id : 17,
+          experienceId : 1,
+          name : 'Deportes náuticos'
+        },
+        {
+          id : 18,
+          experienceId : 1,
+          name : 'Hiking'
+        },
+        {
+          id : 19,
+          experienceId : 2,
+          name : 'Camping'
+        },
+        {
+          id : 20,
+          experienceId : 2,
+          name : 'Parques y reservas naturales'
+        },
+        {
+          id : 21,
+          experienceId : 2,
+          name : 'Ecoturismo'
+        },
+        {
+          id : 22,
+          experienceId : 2,
+          name : 'Observación de Flora y Fauna'
+        },
+        {
+          id : 23,
+          experienceId : 2,
+          name : 'Fotografías de paisajes'
+        },
+        {
+          id : 24,
+          experienceId : 2,
+          name : 'Avistamiento de Aves'
+        },
+        {
+          id : 25,
+          experienceId : 3,
+          name : 'Gastronomía del pacífico'
+        },
+        {
+          id : 26,
+          experienceId : 3,
+          name : 'Gastronomía moderna'
+        },
+        {
+          id : 27,
+          experienceId : 3,
+          name : 'Gastronomía Típica'
+        },
+        {
+          id : 28,
+          experienceId : 3,
+          name : 'Degustaciones'
+        },
+        {
+          id : 29,
+          experienceId : 7,
+          name : 'Patrimonios de la Humanidad'
+        },
+        {
+          id : 30,
+          experienceId : 7,
+          name : 'Literatura'
+        },
+        {
+          id : 31,
+          experienceId : 7,
+          name : 'Museos'
+        },
+        {
+          id : 32,
+          experienceId : 7,
+          name : 'Ciencia del pasado'
+        },
+        {
+          id : 33,
+          experienceId : 7,
+          name : 'Eventos'
+        },
+        {
+          id : 34,
+          experienceId : 8,
+          name : 'Contemplación de estrellas'
+        },
+        {
+          id : 35,
+          experienceId : 8,
+          name : 'Astronomía'
+        },
+        {
+          id : 36,
+          experienceId : 9,
+          name : 'Navegación de lagos'
+        },
+        {
+          id : 37,
+          experienceId : 9,
+          name : 'Cruceros patagónicos'
+        },
+        {
+          id : 38,
+          experienceId : 9,
+          name : 'Cruceros internacionales'
+        },
+        {
+          id : 39,
+          experienceId : 10,
+          name : 'Termas'
+        },
+        {
+          id : 40,
+          experienceId : 10,
+          name : 'Spa'
+        },
+        {
+          id : 41,
+          experienceId : 11,
+          name : 'Playas'
+        },
+        {
+          id : 42,
+          experienceId : 11,
+          name : 'Piscinas'
+        },
+        {
+          id : 43,
+          experienceId : 12,
+          name : 'Shopping'
+        },
+        {
+          id : 44,
+          experienceId : 12,
+          name : 'City Tour'
+        },
+        {
+          id : 45,
+          experienceId : 12,
+          name : 'Vida Nocturna'
+        },
       ];
 
       getCountries(): CountryI[] {
@@ -1060,6 +1342,15 @@ import { CountryI, CityI, EmpresaI, CargoI } from '../models/model.interface';
 
        getCargos(): CargoI[]{
         return this.cargos;
+       }
+
+       getExperience(): ExperienceI[]{
+        return this.experience;
+       }
+
+       getSubexperience(): SubexperienceI[]{
+        return this.subexperience;
+
        }
     }
 

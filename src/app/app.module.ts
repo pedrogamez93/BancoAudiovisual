@@ -18,6 +18,8 @@ import {AngularFireModule} from '@angular/fire/compat';
 import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import { environment } from 'src/environments/environment';
 import { CommonModule } from '@angular/common';
+import { UploadsComponent } from './uploads/uploads.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { CommonModule } from '@angular/common';
     ProfileComponent,
     BoardAdminComponent,
     BoardModeratorComponent,
-    BoardUserComponent
+    BoardUserComponent,
+    UploadsComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

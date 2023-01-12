@@ -1,0 +1,115 @@
+<div class="col-md-10 mx-auto">
+    <div class="card card-body" style="margin-top: 80px !important; margin-bottom: 20%;">
+
+        <div class="form-group">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                            <label for="inputName" class="form-label">Nombre de archivo</label>
+                                <input type="text" class="form-control" id="inputName">
+                    </div>
+            
+                    <div class="col-md-6 mb-3">
+                        <label for="exampleFormControlTextarea1">Descripcion del archivo</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+               <div class="col-md-6 mb-3">
+                <label for="inputState" class="form-label">Tipo de Licencia</label>
+                    <select id="inputState" class="form-select">
+                       <option selected>Selecciona</option>
+                       <option>Exclusivo Sernatur</option>
+                       <option>Libre uso</option>
+                   </select>
+                </div>
+            </div>
+
+                <div class="form-group">
+                    <label for="experience">Seleccione experiencia</label>
+                    <select [(ngModel)]="selectedExperience.id" (change)="onSelect3($any($event.target).value)" subexperience='' class="form-control" name="experiencia">
+                        <option *ngFor="let experience of experience" value={{experience.id}}>
+                            {{experience.name}}
+                        </option>
+                    </select>
+                </div>
+            
+              <br>
+              
+              <div class="form-group">
+                <label for="subexperience">Seleccione Sub experiencia</label>
+                <select class="form-control" name="subexperiencia">
+                    <option *ngFor="let subexperience of  subexperience" value={{subexperience.id}}>
+                        {{subexperience.name}}
+                    </option>
+                </select>
+                
+              </div>
+        </div>
+
+        <div class="container">
+            <div><p>Ingresa las coordenadas donde fue captado el medio, para mostrar su geolocalizacion en Google Maps:</p></div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="inputLatitud" class="form-label">Latitud</label>
+                    <input type="text" class="form-control" id="inputLatitud">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="inputLongitud" class="form-label">Longitud</label>
+                    <input type="text" class="form-control" id="inputLongitud">
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4 mb-3">
+                    <p>Fecha de caducidad</p>
+                    <input type="date" id="start" name="trip-start"
+                       min="1900-01-01" max="2050-01-01">
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <p>Estatus del material</p>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioInline1">Activo</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioInline2">Inactivo</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <p>Material sin fecha de caducidad</p>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline3" name="customRadioInline3" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadioInline3">Sin caducidad</label>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+        
+        
+        <div class="col-md-12">
+            <span style="padding: 10px;">Adjunta tu file</span>
+            <div class="file-select" id="src-file1" >
+                <input type="file" name="src-file1" (change)="getFile ($event)" aria-label="Archivo">
+            </div>
+        </div>
+
+            <div class="col-md-12 pt-2"><button class="btn btn-primary" (click)="sendFile()">Enviar</button></div>
+    
+        
+
+    </div>
+</div>
+    
